@@ -1,0 +1,34 @@
+# Default values for horoscope-scheduler.
+
+# Namespace to deploy the scheduler into
+namespace: default
+
+# Scheduler configuration
+scheduler:
+  name: horoscopeScheduler
+  server: kubernetes.default.svc
+  # How often to check for pending pods (seconds)
+  sleepInterval: 6
+
+# Image configuration
+image:
+  repository: bash
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# ServiceAccount name (created by the chart)
+serviceAccount:
+  name: horoscope-scheduler
+
+# RBAC configuration
+rbac:
+  create: true
+
+# Resources for the scheduler pod
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi

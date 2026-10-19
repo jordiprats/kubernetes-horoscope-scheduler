@@ -1,0 +1,14 @@
+apiVersion: v2
+name: horoscope-scheduler
+description: A Kubernetes scheduler that assigns pods to nodes based on zodiac sign compatibility
+type: application
+version: 0.1.0
+appVersion: 0.1.0
+keywords:
+  - kubernetes
+  - scheduler
+  - horoscope
+  - astrology
+maintainers:
+  - name: Astrology DevOps
+    url: https://github.com/your-org/kubernetes-horoscope-scheduler

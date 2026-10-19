@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "horoscope-scheduler.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "horoscope-scheduler.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "horoscope-scheduler.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: scheduler
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "horoscope-scheduler.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: scheduler
+    spec:
+      {{- if .Values.rbac.create }}
+      serviceAccountName: {{ include "horoscope-scheduler.serviceAccountName" . }}
+      {{- end }}
+      containers:
+      - name: scheduler
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command:
+        - bash
+        - /scripts/scheduler.sh
+        env:
+        - name: SERVER
+          value: "{{ .Values.scheduler.server }}"
+        - name: SCHEDULER
+          value: "{{ .Values.scheduler.name }}"
+        {{- with .Values.resources }}
+        resources:
+          requests:
+            cpu: {{ .requests.cpu }}
+            memory: {{ .requests.memory }}
+          limits:
+            cpu: {{ .limits.cpu }}
+            memory: {{ .limits.memory }}
+        {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+          readOnly: true
+      volumes:
+      - name: scripts
+        configMap:
+          name: {{ include "horoscope-scheduler.fullname" . }}-script
