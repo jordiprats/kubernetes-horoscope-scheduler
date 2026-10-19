@@ -39,7 +39,7 @@ This scheduler watches for pods with `schedulerName: horoscopeScheduler` and bin
 
 3. Deploy a pod with `schedulerName: horoscopeScheduler` (see below).
 
-### ⚡ Production deployment (Helm chart) [someone might recommend this, not me]
+### ⚡ Production deployment (Helm chart) [someone might recommend this, but not me]
 
 > **Disclaimer:** Using this scheduler in production is cosmically inadvisable. Your pods will be scheduled by the stars, not by resource availability. You have been warned. 🔮
 
