@@ -1,6 +1,6 @@
 # 🪐 Kubernetes Horoscope Scheduler
 
-An **astrology-driven** Kubernetes scheduler written in pure **bash**. Pods are assigned to nodes based on zodiac sign compatibility – no labels, no resource constraints, just fate.
+An **astrology-driven** Kubernetes scheduler written in **bash**. Pods are assigned to nodes based on zodiac sign compatibility – no labels, no resource constraints, just fate.
 
 ## How it works
 
